@@ -20,7 +20,7 @@ defmodule ChuckwagonWeb.Router do
   scope "/", ChuckwagonWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", MainLive
   end
 
   # Other scopes may use custom stacks.
