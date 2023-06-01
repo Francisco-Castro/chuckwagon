@@ -1,6 +1,6 @@
 defmodule ChuckwagonWeb.MainLive do
   use ChuckwagonWeb, :live_view
-  alias ChuckwagonWeb.Utils.EmojiesDict
+  alias ChuckwagonWeb.Utils.EmojisDict
 
   def mount(_params, _session, socket) do
     socket =
@@ -45,7 +45,7 @@ defmodule ChuckwagonWeb.MainLive do
               <div class="address">
                 <%= wagon.address %>
               </div>
-              <%= EmojiesDict.call(wagon.food_items) %>
+              <%= EmojisDict.call(wagon.food_items) %>
             </div>
           </li>
         </ul>
