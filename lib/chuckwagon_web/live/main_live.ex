@@ -38,13 +38,13 @@ defmodule ChuckwagonWeb.MainLive do
         <ul>
           <li :for={wagon <- @wagons}>
             <div class="first-line">
-            <div class="name">
-              <%= wagon.name %>
-            </div>
-            <div class="address">
-            <%= wagon.address %>
-            </div>
-            <%= wagon.food_items %>
+              <div class="name">
+                <%= wagon.name %>
+              </div>
+              <div class="address">
+                <%= wagon.address %>
+              </div>
+              <%= wagon.food_items %>
             </div>
           </li>
         </ul>
@@ -67,23 +67,7 @@ defmodule ChuckwagonWeb.MainLive do
   end
 
   def handle_info({:run_search, lookup}, socket) do
-    wagons =
-      "https://data.sfgov.org/api/id/rqzj-sfat.json?$query=select *, :id search '#{lookup}' limit 100&$$query_timeout_seconds=30"
-      |> URI.encode()
-      |> HTTPoison.get()
-      |> case do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> body |> Jason.decode!()
-        _ -> []
-      end
-      |> Enum.map(fn wagon ->
-        %{
-          Wagon.new()
-          | name: wagon["applicant"],
-            address: wagon["address"],
-            food_items: wagon["fooditems"]
-        }
-      end)
-
+    wagons = Chuckwagon.SFApi.call(lookup)
 
     socket =
       assign(socket,
