@@ -4,9 +4,9 @@ defmodule ChuckwagonWeb.MainLiveTest do
   import Phoenix.LiveViewTest
 
   describe "Main render" do
-    test "renders div", %{conn: conn} do
+    test "renders welcome message", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/")
-      assert html =~ "I am a simple div"
+      assert html =~ "The Chuckwagon"
     end
   end
 end
