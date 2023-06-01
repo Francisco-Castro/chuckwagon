@@ -1,4 +1,4 @@
-defmodule ChuckwagonWeb.Utils.EmojiesDict do
+defmodule ChuckwagonWeb.Utils.EmojisDict do
   def call(food_items) do
     String.split(food_items, ":")
     |> Enum.map(fn item -> item |> String.trim() |> translate() end)
